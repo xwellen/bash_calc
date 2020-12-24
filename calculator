@@ -1,0 +1,11 @@
+#!/bin/bash
+TEMPFILE=/tmp/calc-$$
+
+echo "Enter expression:"
+read EXPR
+echo $EXPR | sed 's/\([^0-9]\)\([^0-9]\)/\1 \2/g; s/\([0-9]\+\)\([^0-9]\)/\1 \2/g; s/\([^0-9]\)\([0-9]\+\)/\1 \2/g; s/\([*()]\)/\\\1/g; s/^/expr /' > $TEMPFILE
+echo "Result:"
+sh $TEMPFILE
+rm -f $TEMPFILE
+
+
